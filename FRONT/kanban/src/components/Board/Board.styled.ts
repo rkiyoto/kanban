@@ -9,4 +9,22 @@ const Container = styled.div`
   flex-flow: row wrap;
 `;
 
-export { Container };
+const FloatingButtonContainer = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  right: 32px;
+  bottom: 32px;
+  background-color: green;
+  border-radius: 50%;
+  box-shadow: 1px 1px 4px black;
+
+  i {
+    display: flex;
+    color: white;
+  }
+`;
+
+export { Container, FloatingButtonContainer };

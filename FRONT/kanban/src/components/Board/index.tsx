@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
+import Button from "../Button";
 
 import { iList } from "../../types";
 
@@ -41,12 +42,26 @@ const Board = ({
             <List
               key={list.key}
               list={list}
-              onCreateCard={onCreateCard}
               onUpdateCard={onUpdateCard}
               onDeleteCard={onDeleteCard}
             />
           );
         })}
+        <S.FloatingButtonContainer>
+          <Button
+            title="Criar uma tarefa"
+            size={32}
+            onClick={() =>
+              onCreateCard({
+                titulo: "Titulo",
+                conteudo: "conteudo do card conteudo do card ",
+                lista: "ToDo",
+              })
+            }
+          >
+            <i className="fi-rr-add"></i>
+          </Button>
+        </S.FloatingButtonContainer>
       </S.Container>
     </>
   );

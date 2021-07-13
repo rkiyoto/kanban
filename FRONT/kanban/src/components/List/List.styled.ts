@@ -18,8 +18,8 @@ const Title = styled.h2`
 `;
 
 const List = styled.div<ListDragProps>`
-  position: relative;
   flex: 1;
+  overflow-y: auto;
   padding: 2rem;
   flex-direction: column;
   border-radius: 5px;
@@ -27,10 +27,4 @@ const List = styled.div<ListDragProps>`
   background: ${({ isOver }) => (isOver ? "#0A1E46" : "#C2CCD6")};
 `;
 
-const Footer = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-`;
-
-export { Container, Footer, List, Title };
+export { Container, List, Title };
