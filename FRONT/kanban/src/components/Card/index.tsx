@@ -5,6 +5,8 @@ import { iCard } from "../../types";
 import { DRAG_TYPES } from "../../utils/constants";
 import { useDrag } from "react-dnd";
 
+import Button from "../Button";
+
 import * as S from "./Card.styled";
 interface CardProps {
   card: iCard;
@@ -124,10 +126,12 @@ const Card = ({
             </S.Description>
           </S.Body>
           <S.Footer isEditing>
-            <button type="reset" onClick={() => setIsEditing(false)}>
-              cancel
-            </button>
-            <button type="submit">ok</button>
+            <Button type="reset" onClick={() => setIsEditing(false)}>
+              <i className="fi-rr-cross"></i>
+            </Button>
+            <Button type="submit">
+              <i className="fi-rr-check"></i>
+            </Button>
           </S.Footer>
         </S.Container>
       </form>
@@ -139,8 +143,12 @@ const Card = ({
       <S.Header>
         <S.Title>{titulo}</S.Title>
         <div>
-          <button onClick={() => setIsEditing(true)}>edit</button>
-          <button onClick={handleDeleteButton}>excluir</button>
+          <Button loading onClick={() => setIsEditing(true)}>
+            <i className="fi-rr-pencil"></i>
+          </Button>
+          <Button onClick={handleDeleteButton}>
+            <i className="fi-rr-cross"></i>
+          </Button>
         </div>
       </S.Header>
       <S.Body>
@@ -148,12 +156,16 @@ const Card = ({
       </S.Body>
       <S.Footer>
         {lista !== "ToDo" ? (
-          <button onClick={() => moveCardByButton("backward")}>{"<"}</button>
+          <Button onClick={() => moveCardByButton("backward")}>
+            <i className="fi-rr-angle-double-small-left"></i>
+          </Button>
         ) : (
           <div />
         )}
         {lista !== "Done" ? (
-          <button onClick={() => moveCardByButton("forward")}>{">"}</button>
+          <Button onClick={() => moveCardByButton("forward")}>
+            <i className="fi-rr-angle-double-small-right"></i>
+          </Button>
         ) : (
           <div />
         )}

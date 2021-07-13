@@ -2,6 +2,7 @@
 import React from "react";
 
 import { iCard, iList } from "../../types";
+import Button from "../Button";
 
 import List from "../List";
 
@@ -35,7 +36,7 @@ const Board = ({
 }: BoardProps) => {
   return (
     <>
-      <button
+      <Button
         onClick={() =>
           onCreateCard({
             titulo: "Titulo",
@@ -44,8 +45,8 @@ const Board = ({
           })
         }
       >
-        create
-      </button>
+        <i className="fi-rr-add"></i>
+      </Button>
       <S.Container>
         {lists.map((list: iList) => {
           return (

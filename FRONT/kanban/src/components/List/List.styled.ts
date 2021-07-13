@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  color: #054a91;
+  color: #01091a;
   margin-left: 1rem;
 `;
 
@@ -22,9 +22,8 @@ const List = styled.div<ListDragProps>`
   padding: 2rem;
   flex-direction: column;
   border-radius: 5px;
-  background: #81a4cd;
-  box-shadow: 5px 5px 8px #6f8db0, -5px -5px 8px #93bbea;
-  background: ${({ isOver }) => (isOver ? "#4f647d" : "#81a4cd")};
+  box-shadow: 5px 5px 8px #67799d;
+  background: ${({ isOver }) => (isOver ? "#0A1E46" : "#C2CCD6")};
 `;
 
 export { Container, List, Title };

@@ -14,7 +14,7 @@ const Container = styled.div<CardStyleProps>`
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 4px;
-  background-color: #dbe4ee;
+  background-color: #ece391;
   opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
 `;
 
