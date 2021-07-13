@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from "react";
 
-import { iCard, iList } from "../../types";
-import Button from "../Button";
+import { iList } from "../../types";
 
 import List from "../List";
 
@@ -36,23 +35,13 @@ const Board = ({
 }: BoardProps) => {
   return (
     <>
-      <Button
-        onClick={() =>
-          onCreateCard({
-            titulo: "Titulo",
-            conteudo: "conteudo do card conteudo do card ",
-            lista: "ToDo",
-          })
-        }
-      >
-        <i className="fi-rr-add"></i>
-      </Button>
       <S.Container>
         {lists.map((list: iList) => {
           return (
             <List
               key={list.key}
               list={list}
+              onCreateCard={onCreateCard}
               onUpdateCard={onUpdateCard}
               onDeleteCard={onDeleteCard}
             />

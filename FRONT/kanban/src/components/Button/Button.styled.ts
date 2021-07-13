@@ -1,13 +1,21 @@
+import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
-const Button = styled.button`
+type ButtonBaseProps = {
+  loading?: boolean;
+  size?: number;
+};
+
+type ButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button = styled.button<ButtonProps>`
   cursor: pointer;
   border-radius: 4px;
   margin: 0 8px;
   border-width: 0;
   padding: 4px;
   background-color: transparent;
-  font-size: 16px;
+  font-size: ${({ size }) => (size ? `${size}px` : "16px")};
   :hover {
     opacity: 0.5;
   }

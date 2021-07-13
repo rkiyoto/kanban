@@ -143,7 +143,7 @@ const Card = ({
       <S.Header>
         <S.Title>{titulo}</S.Title>
         <div>
-          <Button loading onClick={() => setIsEditing(true)}>
+          <Button onClick={() => setIsEditing(true)}>
             <i className="fi-rr-pencil"></i>
           </Button>
           <Button onClick={handleDeleteButton}>

@@ -5,14 +5,15 @@ import * as S from "./Button.styled";
 
 type ButtonBaseProps = {
   loading?: boolean;
+  size?: number;
 };
 
 type ButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ loading, children, ...props }: ButtonProps) => {
+const Button = ({ loading, children, size, ...props }: ButtonProps) => {
   const content = loading ? <Loader /> : children;
   return (
-    <S.Button {...props} disabled={loading}>
+    <S.Button {...props} disabled={loading} size={size}>
       {content}
     </S.Button>
   );
