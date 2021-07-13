@@ -1,0 +1,165 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { iCard } from "../../types";
+import { DRAG_TYPES } from "../../utils/constants";
+import { useDrag } from "react-dnd";
+
+import * as S from "./Card.styled";
+interface CardProps {
+  card: iCard;
+  onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
+  onDeleteCard: (id: string) => void;
+}
+
+interface UpdateCardProps {
+  id: string;
+  titulo: string;
+  conteudo: string;
+  lista: string;
+}
+
+interface DropResult {
+  key: string;
+}
+
+type EditionFormInputs = {
+  title: string;
+  content: string;
+};
+
+const Card = ({
+  card: { id, titulo, conteudo, lista },
+  onUpdateCard,
+  onDeleteCard,
+}: CardProps) => {
+  const { register, handleSubmit, reset } = useForm<EditionFormInputs>({
+    defaultValues: {
+      title: titulo,
+      content: conteudo,
+    },
+  });
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: DRAG_TYPES.CARD,
+    item: { id, titulo, conteudo },
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult<DropResult>();
+      if (item && dropResult) {
+        onUpdateCard({ id, titulo, conteudo, lista: dropResult.key });
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+      handlerId: monitor.getHandlerId(),
+    }),
+  }));
+
+  const moveCardByButton = (direction: "forward" | "backward") => {
+    switch (lista) {
+      case "ToDo":
+        if (direction === "forward") {
+          onUpdateCard({ id, titulo, conteudo, lista: "Doing" });
+        }
+        break;
+      case "Doing":
+        onUpdateCard({
+          id,
+          titulo,
+          conteudo,
+          lista: direction === "forward" ? "Done" : "ToDo",
+        });
+        break;
+      case "Done":
+        if (direction === "backward") {
+          onUpdateCard({ id, titulo, conteudo, lista: "Doing" });
+        }
+        break;
+      default:
+        return;
+    }
+  };
+
+  const handleDeleteButton = () => {
+    if (
+      window.confirm(
+        `Você tem certeza que deseja excluir o cartão "${titulo}"?`
+      )
+    ) {
+      onDeleteCard(id);
+    }
+  };
+
+  const handleEditionConfirm: SubmitHandler<EditionFormInputs> = (data) => {
+    onUpdateCard({
+      id,
+      lista,
+      titulo: data.title,
+      conteudo: data.content,
+    });
+    setIsEditing(false);
+  };
+
+  const handleEditionCancel = () => {
+    reset();
+    setIsEditing(false);
+  };
+
+  if (isEditing) {
+    return (
+      <form
+        onSubmit={handleSubmit(handleEditionConfirm)}
+        onReset={handleEditionCancel}
+      >
+        <S.Container>
+          <S.Header>
+            <S.Title>
+              <input {...register("title")} />
+            </S.Title>
+          </S.Header>
+          <S.Body>
+            <S.Description>
+              <textarea {...register("content")} />
+            </S.Description>
+          </S.Body>
+          <S.Footer isEditing>
+            <button type="reset" onClick={() => setIsEditing(false)}>
+              cancel
+            </button>
+            <button type="submit">ok</button>
+          </S.Footer>
+        </S.Container>
+      </form>
+    );
+  }
+
+  return (
+    <S.Container ref={drag} isDragging={isDragging}>
+      <S.Header>
+        <S.Title>{titulo}</S.Title>
+        <div>
+          <button onClick={() => setIsEditing(true)}>edit</button>
+          <button onClick={handleDeleteButton}>excluir</button>
+        </div>
+      </S.Header>
+      <S.Body>
+        <S.Description>{conteudo}</S.Description>
+      </S.Body>
+      <S.Footer>
+        {lista !== "ToDo" ? (
+          <button onClick={() => moveCardByButton("backward")}>{"<"}</button>
+        ) : (
+          <div />
+        )}
+        {lista !== "Done" ? (
+          <button onClick={() => moveCardByButton("forward")}>{">"}</button>
+        ) : (
+          <div />
+        )}
+      </S.Footer>
+    </S.Container>
+  );
+};
+
+export default Card;
