@@ -21,11 +21,16 @@ interface UpdateCardProps {
   lista: string;
 }
 
+interface DeleteCardProps {
+  id: string;
+  titulo: string;
+}
+
 interface BoardProps {
   lists: iList[];
   onCreateCard: ({ titulo, lista, conteudo }: CreateCardProps) => void;
   onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: (id: string) => void;
+  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
 }
 
 const Board = ({

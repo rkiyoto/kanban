@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import Board from "../Board";
 
 import { DndProvider } from "react-dnd";
@@ -7,6 +8,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import useAuth from "../../service/auth/useAuth";
 import useKanban from "../../service/kanban/useKanban";
 import * as S from "./Kanban.styled";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CreateCardProps {
   titulo: string;
@@ -21,16 +23,18 @@ interface UpdateCardProps {
   lista: string;
 }
 
+interface DeleteCardProps {
+  id: string;
+  titulo: string;
+}
+
 const Kanban = () => {
   const { login, logout, isLogged } = useAuth();
-  const { loadCards, createCard, updateCard, deleteCard, lists, clearLists } =
-    useKanban();
+  const { loadCards, createCard, updateCard, deleteCard, lists } = useKanban();
 
   useEffect(() => {
     if (isLogged) {
       loadCards();
-    } else {
-      clearLists();
     }
   }, [isLogged]);
 
@@ -42,8 +46,8 @@ const Kanban = () => {
     updateCard({ id, titulo, conteudo, lista });
   };
 
-  const onDeleteCard = (id: string) => {
-    deleteCard({ id });
+  const onDeleteCard = ({ id, titulo }: DeleteCardProps) => {
+    deleteCard({ id, titulo });
   };
 
   const renderHeaderButton = () => {
@@ -80,6 +84,7 @@ const Kanban = () => {
           />
         )}
       </S.Container>
+      <ToastContainer style={{ width: 400 }} />
     </DndProvider>
   );
 };

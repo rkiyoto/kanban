@@ -10,7 +10,7 @@ import * as S from "./List.styled";
 interface ListProps {
   list: iList;
   onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: (id: string) => void;
+  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
 }
 
 interface UpdateCardProps {
@@ -18,6 +18,11 @@ interface UpdateCardProps {
   titulo: string;
   conteudo: string;
   lista: string;
+}
+
+interface DeleteCardProps {
+  id: string;
+  titulo: string;
 }
 
 const List = ({

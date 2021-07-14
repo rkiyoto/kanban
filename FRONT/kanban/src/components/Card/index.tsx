@@ -11,7 +11,7 @@ import * as S from "./Card.styled";
 interface CardProps {
   card: iCard;
   onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: (id: string) => void;
+  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
 }
 
 interface UpdateCardProps {
@@ -19,6 +19,11 @@ interface UpdateCardProps {
   titulo: string;
   conteudo: string;
   lista: string;
+}
+
+interface DeleteCardProps {
+  id: string;
+  titulo: string;
 }
 
 interface DropResult {
@@ -89,7 +94,7 @@ const Card = ({
         `Você tem certeza que deseja excluir o cartão "${titulo}"?`
       )
     ) {
-      onDeleteCard(id);
+      onDeleteCard({ id, titulo });
     }
   };
 

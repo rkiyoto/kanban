@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ERROR_TOAST_PROPS } from "../../utils/constants";
+import { toast } from "react-toastify";
 
 import Auth from ".";
 
@@ -15,7 +17,10 @@ export default function useAuth() {
       sessionStorage.setItem("token", successToken);
       setIsLogged(true);
     } catch (error) {
-      throw new Error(error);
+      toast.error(
+        `Oops! Não foi possível iniciar a sessão. :( Verifique o status do servidor ou tente novamente mais tarde`,
+        ERROR_TOAST_PROPS
+      );
     }
   };
 

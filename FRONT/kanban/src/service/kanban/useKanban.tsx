@@ -1,5 +1,7 @@
 import { useState, useCallback } from "react";
 import { iCard, iList } from "../../types";
+import { ERROR_TOAST_PROPS, SUCCESS_TOAST_PROPS } from "../../utils/constants";
+import { toast } from "react-toastify";
 
 import Kanban from ".";
 
@@ -17,6 +19,7 @@ interface UpdateCardProps {
 }
 
 interface DeleteCardProps {
+  titulo: string;
   id: string;
 }
 
@@ -54,64 +57,74 @@ export default function useKanban() {
     ]);
   }, []);
 
-  const loadCards = useCallback(async () => {
+  const loadCards = async () => {
     try {
       const data = await Kanban.getCards();
       updateLists(data);
     } catch (error) {
-      throw new Error(error);
+      toast.error(
+        `Oops! Não foi possível carregar seus cards. :(`,
+        ERROR_TOAST_PROPS
+      );
     }
-  }, []);
-
-  const clearLists = () => {
-    setLists([
-      { name: "To do", key: "ToDo", cards: [] },
-      { name: "Doing", key: "Doing", cards: [] },
-      { name: "Done", key: "Done", cards: [] },
-    ]);
   };
 
-  const createCard = useCallback(
-    async ({ titulo, lista, conteudo }: CreateCardProps): Promise<void> => {
-      try {
-        await Kanban.createCard({ titulo, lista, conteudo });
-        loadCards();
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-    []
-  );
+  const createCard = async ({
+    titulo,
+    lista,
+    conteudo,
+  }: CreateCardProps): Promise<void> => {
+    try {
+      await Kanban.createCard({ titulo, lista, conteudo });
+      loadCards();
+      toast.success(`${titulo} criado com sucesso! :D`, SUCCESS_TOAST_PROPS);
+    } catch (error) {
+      toast.error(
+        `Oops! Não foi possível criar o card ${titulo}. :(`,
+        ERROR_TOAST_PROPS
+      );
+    }
+  };
 
-  const updateCard = useCallback(
-    async ({ id, titulo, conteudo, lista }: UpdateCardProps): Promise<void> => {
-      try {
-        await Kanban.updateCard({
-          id,
-          titulo,
-          conteudo,
-          lista,
-        });
-        loadCards();
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-    []
-  );
+  const updateCard = async ({
+    id,
+    titulo,
+    conteudo,
+    lista,
+  }: UpdateCardProps): Promise<void> => {
+    try {
+      await Kanban.updateCard({
+        id,
+        titulo,
+        conteudo,
+        lista,
+      });
+      loadCards();
+      toast.success(
+        `${titulo} atualizado com sucesso! :D`,
+        SUCCESS_TOAST_PROPS
+      );
+    } catch (error) {
+      toast.error(
+        `Oops! Não foi possível atualizar o card ${titulo}. :(`,
+        ERROR_TOAST_PROPS
+      );
+    }
+  };
 
-  const deleteCard = useCallback(
-    async ({ id }: DeleteCardProps): Promise<void> => {
-      try {
-        const data = await Kanban.deleteCard({
-          id,
-        });
-        updateLists(data);
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-    []
-  );
-  return { loadCards, createCard, updateCard, deleteCard, lists, clearLists };
+  const deleteCard = async ({ id, titulo }: DeleteCardProps): Promise<void> => {
+    try {
+      const data = await Kanban.deleteCard({
+        id,
+      });
+      updateLists(data);
+      toast.success(`${titulo} excluído com sucesso! :D`, SUCCESS_TOAST_PROPS);
+    } catch (error) {
+      toast.error(
+        `Oops! Não foi possível excluir o card ${titulo}. :(`,
+        ERROR_TOAST_PROPS
+      );
+    }
+  };
+  return { loadCards, createCard, updateCard, deleteCard, lists };
 }
