@@ -63,6 +63,14 @@ export default function useKanban() {
     }
   }, []);
 
+  const clearLists = () => {
+    setLists([
+      { name: "To do", key: "ToDo", cards: [] },
+      { name: "Doing", key: "Doing", cards: [] },
+      { name: "Done", key: "Done", cards: [] },
+    ]);
+  };
+
   const createCard = useCallback(
     async ({ titulo, lista, conteudo }: CreateCardProps): Promise<void> => {
       try {
@@ -105,5 +113,5 @@ export default function useKanban() {
     },
     []
   );
-  return { loadCards, createCard, updateCard, deleteCard, lists };
+  return { loadCards, createCard, updateCard, deleteCard, lists, clearLists };
 }

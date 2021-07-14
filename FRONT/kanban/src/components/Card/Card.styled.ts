@@ -9,6 +9,7 @@ interface FooterStyleProps {
 }
 
 const Container = styled.div<CardStyleProps>`
+  position: relative;
   flex: 1;
   height: 250px;
   padding: 1rem;
@@ -52,12 +53,12 @@ const Title = styled.h3`
 const Body = styled.div`
   display: flex;
   flex: 1;
-  height: 150px;
+  flex-wrap: wrap;
   padding: 1rem;
-  justify-content: center;
-  align-items: center;
 
   textarea {
+    width: 100%;
+    height: 100%;
     resize: none;
     outline: none;
   }
@@ -70,7 +71,9 @@ const Description = styled.div`
 `;
 
 const Footer = styled.div<FooterStyleProps>`
-  display: flex;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
   justify-content: ${({ isEditing }) =>
     isEditing ? "flex-end" : "space-between"};
 `;

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useState } from "react";
 
 import Auth from ".";
 
@@ -8,21 +8,21 @@ interface LoginProps {
 }
 
 export default function useAuth() {
-  const login = useCallback(
-    async ({ username, password }: LoginProps): Promise<void> => {
-      try {
-        const successToken = await Auth.login({ username, password });
-        sessionStorage.setItem("token", successToken);
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-    []
-  );
+  const [isLogged, setIsLogged] = useState(false);
+  const login = async ({ username, password }: LoginProps): Promise<void> => {
+    try {
+      const successToken = await Auth.login({ username, password });
+      sessionStorage.setItem("token", successToken);
+      setIsLogged(true);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
   const logout = () => {
     sessionStorage.clear();
+    setIsLogged(false);
   };
 
-  return { login, logout };
+  return { login, logout, isLogged };
 }
