@@ -15,7 +15,7 @@ const Container = styled.div<CardStyleProps>`
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 4px;
-  background-color: #ece391;
+  background-color: #fbe7c6;
   opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
 `;
 
@@ -23,7 +23,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 12px;
-  border-bottom: 1px solid #81a4cd;
+  border-bottom: 1px solid #088e8b;
   ::first-child {
     justify-content: flex-start;
   }
@@ -36,13 +36,13 @@ const Header = styled.div`
 const Title = styled.h3`
   margin: 0;
   font-size: 18px;
-  color: #054a91;
+  color: #033736;
 
   input {
     font: inherit;
     font-size: 16px;
     background-color: white;
-    color: #054a91;
+    color: #033736;
     border-width: 1px;
     border-radius: 4px;
     padding: 4px 8px;
@@ -68,6 +68,7 @@ const Description = styled.div`
   display: block;
   height: 100%;
   overflow-y: auto;
+  color: #0e1318;
 `;
 
 const Footer = styled.div<FooterStyleProps>`

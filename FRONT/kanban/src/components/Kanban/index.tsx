@@ -50,9 +50,15 @@ const Kanban = () => {
     deleteCard({ id, titulo });
   };
 
+  const handleLogout = () => {
+    if (window.confirm("Deseja encerrar a sessão?")) {
+      logout();
+    }
+  };
+
   const renderHeaderButton = () => {
     if (isLogged) {
-      return <S.HeaderButton onClick={() => logout()}>Logout</S.HeaderButton>;
+      return <S.HeaderButton onClick={handleLogout}>Logout</S.HeaderButton>;
     }
     return (
       <S.HeaderButton
@@ -63,25 +69,31 @@ const Kanban = () => {
           })
         }
       >
-        Login
+        Log in
       </S.HeaderButton>
     );
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <S.Header>
+        <S.Title>Kanban</S.Title>
+        {renderHeaderButton()}
+      </S.Header>
       <S.Container>
-        <S.Header>
-          <S.Title>Kanban</S.Title>
-          {renderHeaderButton()}
-        </S.Header>
-        {isLogged && (
+        {isLogged ? (
           <Board
             lists={lists}
             onCreateCard={onCreateCard}
             onUpdateCard={onUpdateCard}
             onDeleteCard={onDeleteCard}
           />
+        ) : (
+          <S.LoginWarning>
+            <i className="fi-rr-lock" style={{ fontSize: 64 }}></i>
+            <h1>Você não está autenticado(a)</h1>
+            <h2>Autentique-se clicando no botão Log in na barra superior</h2>
+          </S.LoginWarning>
         )}
       </S.Container>
       <ToastContainer style={{ width: 400 }} />

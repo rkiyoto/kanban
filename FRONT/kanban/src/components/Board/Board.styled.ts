@@ -17,9 +17,9 @@ const FloatingButtonContainer = styled.div`
   height: 50px;
   right: 32px;
   bottom: 32px;
-  background-color: green;
+  background-color: #b00058;
   border-radius: 50%;
-  box-shadow: 1px 1px 4px black;
+  box-shadow: 1px 1px 4px #b00058;
 
   i {
     display: flex;
