@@ -13,3 +13,9 @@ Com os dois primeiros cards em modo de edição:
 Esse é um protótipo bem qualquer nota, sem estilo, nem considerações de UI e UX.
 
 Esperamos uma qualidade bem mais alta de seu trabalho.
+
+Loader: https://loading.io/css/
+
+Toast: https://github.com/fkhadra/react-toastify
+
+Color Pallete from https://www.canva.com/colors/color-palettes/pastel-dreams/
