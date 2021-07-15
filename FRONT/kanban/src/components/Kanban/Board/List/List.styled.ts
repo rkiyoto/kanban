@@ -18,7 +18,7 @@ const Title = styled.h2`
 `;
 
 const List = styled.div<ListDragProps>`
-  flex: 1;
+  flex: 1 1 600px;
   overflow-y: auto;
   padding: 2rem;
   flex-direction: column;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
-import Board from "../Board";
+import Board from "./Board";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";

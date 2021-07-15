@@ -47,20 +47,27 @@ const Title = styled.h3`
     border-radius: 4px;
     padding: 4px 8px;
     outline: none;
+    border: none;
   }
 `;
 
 const Body = styled.div`
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
+  display: block;
+  height: 150px;
   padding: 1rem;
+  padding-bottom: 0;
+  white-space: pre-line;
 
   textarea {
-    width: 100%;
-    height: 100%;
+    flex: 1;
+    width: 90%;
+    height: 110px;
+    color: red;
+    padding: 8px;
+    margin: 8px;
     resize: none;
     outline: none;
+    border: none;
   }
 `;
 

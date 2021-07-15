@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React from "react";
-import Button from "../Button";
+import React, { useState } from "react";
+import NewCardModal from "./NewCardModal";
+import Button from "../../Button";
 
-import { iList } from "../../types";
+import { iList } from "../../../types";
 
-import List from "../List";
+import List from "./List";
 
 import * as S from "./Board.styled";
 
@@ -39,6 +40,7 @@ const Board = ({
   onUpdateCard,
   onDeleteCard,
 }: BoardProps) => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
       <S.Container>
@@ -56,18 +58,17 @@ const Board = ({
           <Button
             title="Criar uma tarefa"
             size={32}
-            onClick={() =>
-              onCreateCard({
-                titulo: "Titulo",
-                conteudo: "conteudo do card conteudo do card ",
-                lista: "ToDo",
-              })
-            }
+            onClick={() => setOpenModal(true)}
           >
             <i className="fi-rr-add"></i>
           </Button>
         </S.FloatingButtonContainer>
       </S.Container>
+      <NewCardModal
+        open={openModal}
+        close={() => setOpenModal(false)}
+        onCreateCard={onCreateCard}
+      />
     </>
   );
 };

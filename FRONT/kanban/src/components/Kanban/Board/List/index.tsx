@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react";
 import { useDrop } from "react-dnd";
-import { iCard, iList } from "../../types";
-import { DRAG_TYPES } from "../../utils/constants";
+import { iCard, iList } from "../../../../types";
+import { DRAG_TYPES } from "../../../../utils/constants";
 import Card from "../Card";
 
 import * as S from "./List.styled";
