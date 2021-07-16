@@ -1,9 +1,5 @@
 ## Rodando a API
 
-Uma API de exemplo foi disponibilizada na pasta BACK.
-
-Para rodá-la, faça:
-
 ```console
 > cd BACK
 > npm install
@@ -11,17 +7,6 @@ Para rodá-la, faça:
 ```
 
 Ela responderá na porta 5000.
-
-## Desafio
-
-Você precisa criar um frontend de acordo com os requisitos abaixo, que deve ser desenvolvido na pasta "FRONT".
-
-Para criar seu frontend você pode escolher entre duas tecnologias:
-
-1. Javascript ou Typescript + REACT
-2. Typescript + ANGULAR
-
-## Requisitos
 
 **Utilização da API**
 
