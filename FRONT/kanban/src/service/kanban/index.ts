@@ -1,15 +1,8 @@
 import { AxiosResponse } from "axios";
 import APICLient from "../APIClient";
 
-import { iCard } from "../../types";
-
-interface CreateCardProps {
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
+import { iCard, CreateCardParams } from "../../model/Kanban";
+interface DeleteCardParam {
   id: string;
 }
 
@@ -27,7 +20,7 @@ export default class Kanban {
     titulo,
     conteudo,
     lista,
-  }: CreateCardProps): Promise<iCard> {
+  }: CreateCardParams): Promise<iCard> {
     try {
       const { data }: AxiosResponse = await APICLient.post("/cards", {
         titulo,
@@ -59,7 +52,7 @@ export default class Kanban {
     }
   }
 
-  static async deleteCard({ id }: DeleteCardProps): Promise<iCard[]> {
+  static async deleteCard({ id }: DeleteCardParam): Promise<iCard[]> {
     try {
       const { data }: AxiosResponse = await APICLient.delete(`/cards/${id}`);
       return data;

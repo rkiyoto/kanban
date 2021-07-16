@@ -1,32 +1,23 @@
 import React, { useEffect } from "react";
+
 import { ToastContainer } from "react-toastify";
-import Board from "./Board";
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  CreateCardParams,
+  DeleteCardParams,
+  UpdateCardParams,
+} from "../../model/Kanban";
+
+import { onDropCardParams } from "./types";
+import useAuth from "../../service/auth/useAuth";
+import useKanban from "../../service/kanban/useKanban";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Board from "./Board";
 
-import useAuth from "../../service/auth/useAuth";
-import useKanban from "../../service/kanban/useKanban";
 import * as S from "./Kanban.styled";
-import "react-toastify/dist/ReactToastify.css";
-
-interface CreateCardProps {
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface UpdateCardProps {
-  id: string;
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
-  id: string;
-  titulo: string;
-}
 
 const Kanban = () => {
   const { login, logout, isLogged } = useAuth();
@@ -38,15 +29,44 @@ const Kanban = () => {
     }
   }, [isLogged]);
 
-  const onCreateCard = ({ titulo, conteudo, lista }: CreateCardProps) => {
+  const onCreateCard = ({ titulo, conteudo, lista }: CreateCardParams) => {
     createCard({ titulo, conteudo, lista });
   };
 
-  const onUpdateCard = ({ id, titulo, conteudo, lista }: UpdateCardProps) => {
+  const onUpdateCard = ({ id, titulo, conteudo, lista }: UpdateCardParams) => {
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 37 ~ onUpdateCard ~ id, titulo, conteudo, lista",
+      id,
+      titulo,
+      conteudo,
+      lista
+    );
     updateCard({ id, titulo, conteudo, lista });
   };
 
-  const onDeleteCard = ({ id, titulo }: DeleteCardProps) => {
+  const onDropCard = ({ id, origin, destination }: onDropCardParams) => {
+    console.log("🚀 ~ file:", lists[0]?.cards[0]?.titulo);
+    const originList = lists.find((list) => list.key === origin);
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 55 ~ onDropCard ~ originList",
+      originList?.cards[0].titulo
+    );
+    if (originList) {
+      const droppedCard = originList.cards.find((card) => card.id === id);
+      console.log(
+        "🚀 ~ file: index.tsx ~ line 58 ~ onDropCard ~ droppedCard",
+        droppedCard
+      );
+      if (droppedCard) {
+        updateCard({
+          ...droppedCard,
+          lista: destination,
+        });
+      }
+    }
+  };
+
+  const onDeleteCard = ({ id, titulo }: DeleteCardParams) => {
     deleteCard({ id, titulo });
   };
 
@@ -87,6 +107,7 @@ const Kanban = () => {
             onCreateCard={onCreateCard}
             onUpdateCard={onUpdateCard}
             onDeleteCard={onDeleteCard}
+            onDropCard={onDropCard}
           />
         ) : (
           <S.LoginWarning>

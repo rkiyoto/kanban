@@ -1,27 +1,15 @@
-import { useState, useCallback } from "react";
-import { iCard, iList } from "../../types";
+import { useState } from "react";
+import {
+  iCard,
+  iList,
+  CreateCardParams,
+  UpdateCardParams,
+  DeleteCardParams,
+} from "../../model/Kanban";
 import { ERROR_TOAST_PROPS, SUCCESS_TOAST_PROPS } from "../../utils/constants";
 import { toast } from "react-toastify";
 
 import Kanban from ".";
-
-interface CreateCardProps {
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface UpdateCardProps {
-  id: string;
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
-  titulo: string;
-  id: string;
-}
 
 export default function useKanban() {
   const [lists, setLists] = useState<iList[]>([
@@ -30,7 +18,7 @@ export default function useKanban() {
     { name: "Done", key: "Done", cards: [] },
   ]);
 
-  const updateLists = useCallback((cards: iCard[]) => {
+  const updateLists = (cards: iCard[]) => {
     const todoTempList: iCard[] = [];
     const doingTempList: iCard[] = [];
     const doneTempList: iCard[] = [];
@@ -55,7 +43,7 @@ export default function useKanban() {
       { name: "Doing", key: "Doing", cards: doingTempList },
       { name: "Done", key: "Done", cards: doneTempList },
     ]);
-  }, []);
+  };
 
   const loadCards = async () => {
     try {
@@ -73,7 +61,7 @@ export default function useKanban() {
     titulo,
     lista,
     conteudo,
-  }: CreateCardProps): Promise<void> => {
+  }: CreateCardParams): Promise<void> => {
     try {
       await Kanban.createCard({ titulo, lista, conteudo });
       loadCards();
@@ -91,7 +79,7 @@ export default function useKanban() {
     titulo,
     conteudo,
     lista,
-  }: UpdateCardProps): Promise<void> => {
+  }: UpdateCardParams): Promise<void> => {
     try {
       await Kanban.updateCard({
         id,
@@ -112,7 +100,10 @@ export default function useKanban() {
     }
   };
 
-  const deleteCard = async ({ id, titulo }: DeleteCardProps): Promise<void> => {
+  const deleteCard = async ({
+    id,
+    titulo,
+  }: DeleteCardParams): Promise<void> => {
     try {
       const data = await Kanban.deleteCard({
         id,

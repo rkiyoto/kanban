@@ -1,44 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState } from "react";
+import { iList } from "../../../model/Kanban";
+import { BoardProps } from "../types";
+
 import NewCardModal from "./NewCardModal";
 import Button from "../../Button";
-
-import { iList } from "../../../types";
-
 import List from "./List";
 
 import * as S from "./Board.styled";
-
-interface CreateCardProps {
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface UpdateCardProps {
-  id: string;
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
-  id: string;
-  titulo: string;
-}
-
-interface BoardProps {
-  lists: iList[];
-  onCreateCard: ({ titulo, lista, conteudo }: CreateCardProps) => void;
-  onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
-}
 
 const Board = ({
   lists = [],
   onCreateCard,
   onUpdateCard,
   onDeleteCard,
+  onDropCard,
 }: BoardProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   return (
@@ -51,6 +27,7 @@ const Board = ({
               list={list}
               onUpdateCard={onUpdateCard}
               onDeleteCard={onDeleteCard}
+              onDropCard={onDropCard}
             />
           );
         })}

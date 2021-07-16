@@ -1,46 +1,29 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { iCard } from "../../../../types";
 import { DRAG_TYPES } from "../../../../utils/constants";
 import { useDrag } from "react-dnd";
+import { CardProps } from "../../types";
 
 import Button from "../../../Button";
 
 import * as S from "./Card.styled";
-interface CardProps {
-  card: iCard;
-  onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
-}
-
-interface UpdateCardProps {
-  id: string;
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
-  id: string;
-  titulo: string;
-}
 
 interface DropResult {
   key: string;
 }
 
-type EditionFormInputs = {
+interface EditionFormInputs {
   title: string;
   content: string;
-};
+}
 
 const Card = ({
   card: { id, titulo, conteudo, lista },
   onUpdateCard,
   onDeleteCard,
+  onDropCard,
 }: CardProps) => {
-  console.log("🚀 ~ file: index.tsx ~ line 43 ~ titulo", titulo);
   const { register, handleSubmit, reset } = useForm<EditionFormInputs>({
     defaultValues: {
       title: titulo,
@@ -50,11 +33,16 @@ const Card = ({
   const [isEditing, setIsEditing] = useState(false);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: DRAG_TYPES.CARD,
-    item: { id, titulo, conteudo },
+    item: { id },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>();
       if (item && dropResult) {
-        onUpdateCard({ id, titulo, conteudo, lista: dropResult.key });
+        console.log(
+          "🚀 ~ file: index.tsx ~ line 59 ~ const[{isDragging},drag]=useDrag ~ item",
+          item
+        );
+        onDropCard({ id, origin: lista, destination: dropResult.key });
+        // onUpdateCard({ id, titulo, conteudo, lista: dropResult.key });
       }
     },
     collect: (monitor) => ({

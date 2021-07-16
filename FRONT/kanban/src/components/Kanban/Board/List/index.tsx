@@ -1,34 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react";
 import { useDrop } from "react-dnd";
-import { iCard, iList } from "../../../../types";
 import { DRAG_TYPES } from "../../../../utils/constants";
+import { iCard } from "../../../../model/Kanban";
+import { ListProps } from "../../types";
 import Card from "../Card";
 
 import * as S from "./List.styled";
-
-interface ListProps {
-  list: iList;
-  onUpdateCard: ({ id, titulo, conteudo, lista }: UpdateCardProps) => void;
-  onDeleteCard: ({ id, titulo }: DeleteCardProps) => void;
-}
-
-interface UpdateCardProps {
-  id: string;
-  titulo: string;
-  conteudo: string;
-  lista: string;
-}
-
-interface DeleteCardProps {
-  id: string;
-  titulo: string;
-}
 
 const List = ({
   list: { name, key, cards },
   onUpdateCard,
   onDeleteCard,
+  onDropCard,
 }: ListProps) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: DRAG_TYPES.CARD,
@@ -49,6 +33,7 @@ const List = ({
             card={card}
             onUpdateCard={onUpdateCard}
             onDeleteCard={onDeleteCard}
+            onDropCard={onDropCard}
           />
         ))}
       </S.List>

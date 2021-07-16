@@ -1,10 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
-type ButtonBaseProps = {
-  loading?: boolean;
-  size?: number;
-};
+import { ButtonBaseProps } from ".";
 
 type ButtonProps = ButtonBaseProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -18,9 +15,6 @@ const Button = styled.button<ButtonProps>`
   background-color: transparent;
   font-size: ${({ size }) => (size ? `${size}px` : "16px")};
   :hover {
-    opacity: 0.5;
-  }
-  :disabled {
     opacity: 0.5;
   }
 `;
