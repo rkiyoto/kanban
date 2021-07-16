@@ -1,21 +1,76 @@
-# Desafio Técnico - Frontend
+# React Kanban
 
-O propósito desse desafio é a criação de frontend para um quadro de kanban. Esse quadro possui listas, que contém cards.
+This project ships a 3-list Kanban React application
 
-As imagens abaixo são apenas uma ilustração da funcionalidade desejada:
+## Runnning
 
-![](https://s3-sa-east-1.amazonaws.com/lcpi/62b90509-8792-4fb1-9aa7-240f5a22c88e.png)
+1. Start API:
 
-Com os dois primeiros cards em modo de edição:
+```
+  $ cd BACK
+  $ npm install
+  $ npm run server
+```
 
-![](https://s3-sa-east-1.amazonaws.com/lcpi/64875968-b03c-49b7-9c28-4d82b73e7d51.png)
+2.
 
-Esse é um protótipo bem qualquer nota, sem estilo, nem considerações de UI e UX.
+```
+  $ cd FRONT/kanban
+  $ yarn
+  $ yarn start
+```
 
-Esperamos uma qualidade bem mais alta de seu trabalho.
+The application will be running on http://localhost:3000
 
-Loader: https://loading.io/css/
+## Quick guide
 
-Toast: https://github.com/fkhadra/react-toastify
+1. Before start creating your cards and moving them, you must Login before. Do it clicking on `Login` button on top-right corner
 
-Color Pallete from https://www.canva.com/colors/color-palettes/pastel-dreams/
+2. Create a card clicking on `+` on bottom-right corner
+
+3. Enjoy :D
+
+## Typescript
+
+To set Typescript version to `4.1.2` [check here](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions):
+
+```
+$ npm install -g typescript@4.1.2
+```
+
+Then update
+
+`"typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"`
+<br>
+on `.vscode/settings.json` file
+
+**OR**
+
+If using Typescript version < 4.1.2, set `./tsconfig.json` to
+
+`compilerOptions.jsx = "react"`
+<br>
+after running `yarn start` command
+
+## 3rd party libraries/References
+
+- [Axios](https://github.com/axios/axios)
+
+- [Toast](https://github.com/fkhadra/react-toastify)
+
+- [React DnD](https://react-dnd.github.io/react-dnd/about)
+
+- [React Hook Form](https://github.com/react-hook-form/react-hook-form)
+
+- [Color Pallete](https://www.canva.com/colors/color-palettes/pastel-dreams/)
+
+## Known issues/Debts
+
+- Drag/drop on recently updated cards will reverse their changes :(
+
+- Running `yarn start` using 4.0.3 Typescript version will spam `Cannot use JSX unless the '--jsx' flag is provided` errors across the code, to avoid this try one of these:
+
+  - [Setting typescript version to 4.1.2](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions)
+  - Setting `compilerOptions.jsx = "react"` on ./tsconfig.json file
+
+- Missing Login modal to input username and password
