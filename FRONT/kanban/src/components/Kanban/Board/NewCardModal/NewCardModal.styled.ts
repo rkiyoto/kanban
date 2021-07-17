@@ -7,7 +7,7 @@ const NewCardForm = styled.form`
   align-items: flex-start;
 
   input {
-    color: #0e1318;
+    color: ${({ theme }) => theme.font.primary};
     font-size: 18px;
     padding: 8px;
     margin: 0 8px;
@@ -16,7 +16,7 @@ const NewCardForm = styled.form`
   textarea {
     flex: 1;
     width: 90%;
-    color: #0e1318;
+    color: ${({ theme }) => theme.font.primary};
     padding: 8px;
     margin: 8px;
     resize: none;

@@ -4,7 +4,7 @@ import Button from "../Button";
 const Container = styled.div`
   display: block;
   height: 100vh;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
 `;
 
 const Header = styled.div`
@@ -13,7 +13,7 @@ const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   padding: 8px 0;
 `;
 
@@ -21,19 +21,19 @@ const Title = styled.h1`
   margin-left: 24px;
   font-size: 16px;
   font-weight: 600;
-  color: #ff3b9d;
+  color: ${({ theme }) => theme.kanban.logo};
 `;
 
 const HeaderButton = styled(Button)`
   margin-right: 24px;
   padding: 4px;
   width: 64px;
-  background-color: rgba(64, 87, 109, 0.07);
-  color: #0e1318;
+  background-color: ${({ theme }) => theme.font.primaryWeakest};
+  color: ${({ theme }) => theme.font.primary};
 
   :hover {
     opacity: 1;
-    background-color: rgba(57, 76, 96, 0.15);
+    background-color: ${({ theme }) => theme.font.primaryWeak};
   }
 `;
 
@@ -43,7 +43,7 @@ const LoginWarning = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: rgba(17, 23, 29, 0.8);
+  color: ${({ theme }) => theme.font.primary};
 
   h1: {
     font-size: 32px;

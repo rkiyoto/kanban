@@ -15,7 +15,7 @@ const Container = styled.div<CardStyleProps>`
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 4px;
-  background-color: #fbe7c6;
+  background-color: ${({ theme }) => theme.card.background};
   opacity: ${({ isDragging }) => (isDragging ? 0.5 : 1)};
 `;
 
@@ -23,7 +23,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 12px;
-  border-bottom: 1px solid #088e8b;
+  border-bottom: 1px solid ${({ theme }) => theme.card.border};
   ::first-child {
     justify-content: flex-start;
   }
@@ -36,13 +36,12 @@ const Header = styled.div`
 const Title = styled.h3`
   margin: 0;
   font-size: 18px;
-  color: #033736;
-
+  color: ${({ theme }) => theme.card.title};
   input {
     font: inherit;
     font-size: 16px;
     background-color: white;
-    color: #033736;
+    color: ${({ theme }) => theme.card.title};
     border-width: 1px;
     border-radius: 4px;
     padding: 4px 8px;
@@ -62,7 +61,8 @@ const Body = styled.div`
     flex: 1;
     width: 90%;
     height: 110px;
-    color: red;
+    background-color: white;
+    color: ${({ theme }) => theme.font.primary};
     padding: 8px;
     margin: 8px;
     resize: none;
@@ -75,7 +75,7 @@ const Description = styled.div`
   display: block;
   height: 100%;
   overflow-y: auto;
-  color: #0e1318;
+  color: ${({ theme }) => theme.font.primary};
 `;
 
 const Footer = styled.div<FooterStyleProps>`

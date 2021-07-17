@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  color: #056360;
+  color: ${({ theme }) => theme.list.title};
   margin-left: 1rem;
 `;
 
@@ -23,8 +23,8 @@ const List = styled.div<ListDragProps>`
   padding: 2rem;
   flex-direction: column;
   border-radius: 5px;
-  background: ${({ isOver }) =>
-    isOver ? "rgb(160, 231, 229)" : "rgb(160, 231, 229, 0.7)"};
+  background: ${({ isOver, theme }) =>
+    isOver ? theme.list.background : theme.list.dragOverBackground};
 `;
 
 export { Container, List, Title };

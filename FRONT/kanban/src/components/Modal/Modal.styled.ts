@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ModalBackground = styled.div`
-  display: black;
+  display: block;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -9,8 +9,7 @@ const ModalBackground = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: ${({ theme }) => theme.font.primaryWeak};
 `;
 
 const ModalContent = styled.div`
@@ -18,7 +17,7 @@ const ModalContent = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #fefefe;
+  background-color: ${({ theme }) => theme.kanban.background};
   margin: 15% auto;
   padding: 0 20px;
   border-radius: 4px;

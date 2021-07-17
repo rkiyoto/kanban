@@ -11,7 +11,7 @@ const Button = styled.button<ButtonProps>`
   margin: 0 8px;
   border-width: 0;
   padding: 4px;
-  color: #033736;
+  color: ${({ theme }) => theme.button.color};
   background-color: transparent;
   font-size: ${({ size }) => (size ? `${size}px` : "16px")};
   :hover {

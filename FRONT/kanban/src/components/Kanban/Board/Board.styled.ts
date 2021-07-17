@@ -17,9 +17,9 @@ const FloatingButtonContainer = styled.div`
   height: 50px;
   right: 32px;
   bottom: 32px;
-  background-color: #b00058;
+  background-color: ${({ theme }) => theme.board.floatingButton};
   border-radius: 50%;
-  box-shadow: 1px 1px 4px #b00058;
+  box-shadow: 1px 1px 4px ${({ theme }) => theme.board.floatingButton};
 
   i {
     display: flex;
