@@ -52,6 +52,14 @@ If using Typescript version < 4.1.2, set `./tsconfig.json` to
 <br>
 after running `yarn start` command
 
+## Testing
+
+To run tests, use command:
+
+```
+$ yarn test
+```
+
 ## 3rd party libraries/References
 
 - [Axios](https://github.com/axios/axios)
@@ -74,3 +82,7 @@ after running `yarn start` command
   - Setting `compilerOptions.jsx = "react"` on ./tsconfig.json file
 
 - Missing Login modal to input username and password
+
+- Lacks some a11y-friendly components
+
+- Lacks i18n treatment
