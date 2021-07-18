@@ -37,12 +37,7 @@ const Card = ({
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>();
       if (item && dropResult) {
-        console.log(
-          "🚀 ~ file: index.tsx ~ line 59 ~ const[{isDragging},drag]=useDrag ~ item",
-          item
-        );
         onDropCard({ id, origin: lista, destination: dropResult.key });
-        // onUpdateCard({ id, titulo, conteudo, lista: dropResult.key });
       }
     },
     collect: (monitor) => ({

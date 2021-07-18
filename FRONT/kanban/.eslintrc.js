@@ -19,6 +19,9 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-use-before-define": "warn",
+    "no-console": "error",
   },
 };

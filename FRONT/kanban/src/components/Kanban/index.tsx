@@ -39,29 +39,13 @@ const Kanban = ({ isLogged, login, logout }: KanbanProps) => {
   };
 
   const onUpdateCard = ({ id, titulo, conteudo, lista }: UpdateCardParams) => {
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 37 ~ onUpdateCard ~ id, titulo, conteudo, lista",
-      id,
-      titulo,
-      conteudo,
-      lista
-    );
     updateCard({ id, titulo, conteudo, lista });
   };
 
   const onDropCard = ({ id, origin, destination }: onDropCardParams) => {
-    console.log("🚀 ~ file:", lists[0]?.cards[0]?.titulo);
     const originList = lists.find((list) => list.key === origin);
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 55 ~ onDropCard ~ originList",
-      originList?.cards[0].titulo
-    );
     if (originList) {
       const droppedCard = originList.cards.find((card) => card.id === id);
-      console.log(
-        "🚀 ~ file: index.tsx ~ line 58 ~ onDropCard ~ droppedCard",
-        droppedCard
-      );
       if (droppedCard) {
         updateCard({
           ...droppedCard,
