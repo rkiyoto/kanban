@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import Auth from ".";
 
-interface LoginProps {
+export interface LoginProps {
   username: string;
   password: string;
 }

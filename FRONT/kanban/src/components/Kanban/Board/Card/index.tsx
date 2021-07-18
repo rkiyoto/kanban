@@ -110,19 +110,26 @@ const Card = ({
         <S.Container>
           <S.Header>
             <S.Title>
-              <input {...register("title")} />
+              <input data-testid="title-input" {...register("title")} />
             </S.Title>
           </S.Header>
           <S.Body>
             <S.Description>
-              <textarea {...register("content")} />
+              <textarea
+                data-testid="content-textarea"
+                {...register("content")}
+              />
             </S.Description>
           </S.Body>
           <S.Footer isEditing>
-            <Button type="reset" onClick={() => setIsEditing(false)}>
+            <Button
+              data-testid="cancel-button"
+              type="reset"
+              onClick={() => setIsEditing(false)}
+            >
               <i className="fi-rr-cross"></i>
             </Button>
-            <Button type="submit">
+            <Button data-testid="submit-button" type="submit">
               <i className="fi-rr-check"></i>
             </Button>
           </S.Footer>
@@ -132,14 +139,18 @@ const Card = ({
   }
 
   return (
-    <S.Container ref={drag} isDragging={isDragging}>
+    <S.Container
+      data-testid="card-container"
+      ref={drag}
+      isDragging={isDragging}
+    >
       <S.Header>
         <S.Title>{titulo}</S.Title>
         <div>
-          <Button onClick={() => setIsEditing(true)}>
+          <Button data-testid="edit-button" onClick={() => setIsEditing(true)}>
             <i className="fi-rr-pencil"></i>
           </Button>
-          <Button onClick={handleDeleteButton}>
+          <Button data-testid="delete-button" onClick={handleDeleteButton}>
             <i className="fi-rr-cross"></i>
           </Button>
         </div>
@@ -149,14 +160,20 @@ const Card = ({
       </S.Body>
       <S.Footer>
         {lista !== "ToDo" ? (
-          <Button onClick={() => moveCardByButton("backward")}>
+          <Button
+            data-testid="backward-button"
+            onClick={() => moveCardByButton("backward")}
+          >
             <i className="fi-rr-angle-double-small-left"></i>
           </Button>
         ) : (
           <div />
         )}
         {lista !== "Done" ? (
-          <Button onClick={() => moveCardByButton("forward")}>
+          <Button
+            data-testid="forward-button"
+            onClick={() => moveCardByButton("forward")}
+          >
             <i className="fi-rr-angle-double-small-right"></i>
           </Button>
         ) : (

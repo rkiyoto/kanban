@@ -55,6 +55,7 @@ const NewCardModal = ({ open, close, onCreateCard }: NewCardModalProps) => {
       <S.NewCardForm onSubmit={handleSubmit(handleCreationConfirm)}>
         <input
           placeholder="Título"
+          data-testid="title-input"
           {...register("title", {
             required: {
               value: true,
@@ -67,6 +68,7 @@ const NewCardModal = ({ open, close, onCreateCard }: NewCardModalProps) => {
         )}
         <textarea
           placeholder="Conteúdo"
+          data-testid="content-textarea"
           {...register("content", {
             required: {
               value: true,
@@ -77,7 +79,7 @@ const NewCardModal = ({ open, close, onCreateCard }: NewCardModalProps) => {
         {errors.content && (
           <S.MessageError>{errors.content.message}</S.MessageError>
         )}
-        <Button type="submit">
+        <Button data-testid="submit-button" type="submit" name="confirm">
           <i className="fi-rr-check"></i>
         </Button>
       </S.NewCardForm>

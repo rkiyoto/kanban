@@ -19,7 +19,7 @@ const Board = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <>
-      <S.Container>
+      <S.Container data-testid="board-component">
         {lists.map((list: iList) => {
           return (
             <List

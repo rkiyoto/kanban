@@ -10,7 +10,7 @@ import {
 } from "../../model/Kanban";
 
 import { onDropCardParams } from "./types";
-import useAuth from "../../service/auth/useAuth";
+import { LoginProps } from "../../service/auth/useAuth";
 import useKanban from "../../service/kanban/useKanban";
 
 import { DndProvider } from "react-dnd";
@@ -19,8 +19,13 @@ import Board from "./Board";
 
 import * as S from "./Kanban.styled";
 
-const Kanban = () => {
-  const { login, logout, isLogged } = useAuth();
+interface KanbanProps {
+  isLogged: boolean;
+  login: ({ username, password }: LoginProps) => Promise<void>;
+  logout: () => void;
+}
+
+const Kanban = ({ isLogged, login, logout }: KanbanProps) => {
   const { loadCards, createCard, updateCard, deleteCard, lists } = useKanban();
 
   useEffect(() => {
